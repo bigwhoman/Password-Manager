@@ -46,7 +46,7 @@ services:
     restart: always
     ports:
       - 80:80
-      - 443:4433
+      - 442:442
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yaml:/traefik.yaml:ro
