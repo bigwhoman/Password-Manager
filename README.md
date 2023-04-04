@@ -2,12 +2,16 @@
 A script that sets up yout own password manager on linux server
 Run the command below to create your password manager
 
-```bash
+```shell
 wget https://raw.githubusercontent.com/bigwhoman/Password-Manager/main/install.sh
 chmod +x install.sh
 sudo bash install.sh
 ```
 You should give your <b> hosting domain, email, name and surname </b>.<br>
+This script only works if you have a hosting domain so if you do not have one or you are not sure, use the command below to find it
+```shell
+hostnamectl | grep 'hostname'
+```
 After the complete installation ( lookout for the ports and check if docker ps is right) you would get 
 a completion like this : 
 ```bash
