@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     environment:
-      APP_FULL_BASE_URL: "https://DOMAINNAME_CLOUD_SERVER:${PORT}"
+      APP_FULL_BASE_URL: "https://$DOMAINNAME_CLOUD_SERVER:$PORT"
       DATASOURCES_DEFAULT_HOST: "db"
       DATASOURCES_DEFAULT_USERNAME: "passbolt"
       DATASOURCES_DEFAULT_PASSWORD: "P4ssb0lt"
@@ -42,7 +42,7 @@ services:
     restart: always
     ports:
       - "80:80"
-      - "8443:443"
+      - "$PORT:443"
     environment:
       - CF_API_EMAIL=$CLOUDFLARE_EMAIL
       - CF_API_KEY=$CLOUDFLARE_API_KEY
