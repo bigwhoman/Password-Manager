@@ -1,0 +1,71 @@
+version: '3.9'
+services:
+  db:
+    image: mariadb:10.3
+    restart: unless-stopped
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      MYSQL_DATABASE: "passbolt"
+      MYSQL_USER: "passbolt"
+      MYSQL_PASSWORD: "P4ssb0lt"
+    volumes:
+      - database_volume:/var/lib/mysql
+    networks:
+      - traefik-proxy
+  passbolt:
+    image: passbolt/passbolt:latest-ce
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      APP_FULL_BASE_URL: "https://DOMAINNAME_CLOUD_SERVER:${PORT}"
+      DATASOURCES_DEFAULT_HOST: "db"
+      DATASOURCES_DEFAULT_USERNAME: "passbolt"
+      DATASOURCES_DEFAULT_PASSWORD: "P4ssb0lt"
+      DATASOURCES_DEFAULT_DATABASE: "passbolt"
+    volumes:
+      - gpg_volume:/etc/passbolt/gpg
+      - jwt_volume:/etc/passbolt/jwt
+    command: ["/usr/bin/wait-for.sh", "-t", "0", "db:3306", "--", "/docker-entrypoint.sh"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy"
+      - "traefik.http.routers.passbolt.rule=Host(`$DOMAINNAME_CLOUD_SERVER`)"
+      - "traefik.http.routers.passbolt.entrypoints=websecure"
+      - "traefik.http.routers.passbolt.tls.certresolver=cloudflare"
+      - "traefik.http.services.passbolt.loadbalancer.server.port=80"  
+    networks:
+      - traefik-proxy
+  traefik:
+    image: traefik:2.7
+    container_name: traefik
+    restart: always
+    ports:
+      - "80:80"
+      - "8443:443"
+    environment:
+      - CF_API_EMAIL=$CLOUDFLARE_EMAIL
+      - CF_API_KEY=$CLOUDFLARE_API_KEY
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=$CLOUDFLARE_EMAIL"
+      - "--certificatesresolvers.myresolver.acme.storage=acme.json"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./acme.json:/acme.json
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true       
+volumes:
+  database_volume:
+  gpg_volume:
+  jwt_volume:
