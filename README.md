@@ -1,7 +1,8 @@
 # Password-Manager
 A script that sets up yout own password manager on linux server
-Run the command below to create your password manager
-
+Run the command below to create your password manager.<br>
+It has two options, if your domain is on cloudflare and if not. My personal preference is the one with cloudflare.
+# Domain not on cloudflare
 ```shell
 wget https://raw.githubusercontent.com/bigwhoman/Password-Manager/main/install.sh
 chmod +x install.sh
@@ -12,6 +13,7 @@ This script only works if you have a hosting domain so if you do not have one or
 ```shell
 hostnamectl | grep 'hostname'
 ```
+# Domain on cloudflare
 After the complete installation ( lookout for the ports and check if docker ps is right) you would get 
 a completion like this : 
 ```bash
