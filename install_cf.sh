@@ -37,7 +37,7 @@ if [[ -z "$surname" ]]; then
 fi
 wget https://raw.githubusercontent.com/bigwhoman/Password-Manager/main/.env -P passbolt
 # Update .env file
-cat > .env <<- EOM
+cat > passbolt/.env <<- EOM
 DOMAINNAME_CLOUD_SERVER=$domain
 CLOUDFLARE_EMAIL=$email
 CLOUDFLARE_API_KEY=$api_key
