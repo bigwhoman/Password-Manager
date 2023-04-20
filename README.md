@@ -14,6 +14,14 @@ This script only works if you have a hosting domain so if you do not have one or
 hostnamectl | grep 'hostname'
 ```
 # Domain on cloudflare
+<b>you have to add your domain to cloudflare before the steps below</b><br>
+First, we need to create a <b>cloudflare certificate</b> for our domain, to do this go to : <br>
+cloudflare dashboard --> ssl-tls --> client-certificates --> Create Certificate <br>
+![image](https://user-images.githubusercontent.com/79264715/233497050-c85bd3a2-f042-4cc8-953f-b977d97e84f5.png)
+<br>
+Then we need to get a cloudflare API_KEY from cloudflare dashboard : <l>https://dash.cloudflare.com/profile/api-tokens</l>.
+<br>
+
 After the complete installation ( lookout for the ports and check if docker ps is right) you would get 
 a completion like this : 
 ```bash
