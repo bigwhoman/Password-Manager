@@ -42,6 +42,8 @@ a completion like this :
 https://my.domain.tld/setup/install/1eafab88-a17d-4ad8-97af-77a97f5ff552/f097be64-3703-41e2-8ea2-d59cbe1c15bc
 ```
 Just copy the url into your browser and you are good to go.
+![image](https://user-images.githubusercontent.com/79264715/233514232-e7333f0c-20b2-4ad5-892a-8a2d34d9a5bc.png)
+
 <b>Note</b>
 If you get a database error, just wait and after a while, enter the command below 
 ```shell
