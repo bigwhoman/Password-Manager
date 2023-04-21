@@ -59,3 +59,4 @@ If you want to remove the whole thing with dockers and volumes :
 docker-compose -f passbolt/docker-compose-cf.yaml down -v
 rm -f -r passbolt
 ```
+Remember to open your port !!!!!
