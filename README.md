@@ -21,7 +21,13 @@ cloudflare dashboard --> ssl-tls --> client-certificates --> Create Certificate 
 <br>
 Then we need to get a cloudflare API_KEY from cloudflare dashboard : <l>https://dash.cloudflare.com/profile/api-tokens</l>.
 <br>
-
+Now run the script below
+```shell
+wget https://raw.githubusercontent.com/bigwhoman/Password-Manager/main/install_cf.sh
+chmod +x install.sh
+sudo bash install.sh
+```
+In the next steps you are asked some questions, answer them.<br>
 After the complete installation ( lookout for the ports and check if docker ps is right) you would get 
 a completion like this : 
 ```bash
@@ -36,3 +42,18 @@ a completion like this :
 https://my.domain.tld/setup/install/1eafab88-a17d-4ad8-97af-77a97f5ff552/f097be64-3703-41e2-8ea2-d59cbe1c15bc
 ```
 Just copy the url into your browser and you are good to go.
+<b>Note</b>
+If you get a database error, just wait and after a while, enter the command below 
+```shell
+$ docker-compose -f passbolt/docker-compose-ce.yaml exec passbolt su -m -c "/usr/share/php/passbolt/bin/cake \
+                                passbolt register_user \
+                                -u <your@email.com> \
+                                -f <yourname> \
+                                -l <surname> \
+                                -r admin" -s /bin/sh www-data
+```
+If you want to remove the whole thing with dockers and volumes : 
+```shell
+docker-compose -f passbolt/docker-compose-cf.yaml down -v
+rm -f -r passbolt
+```
