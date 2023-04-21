@@ -24,8 +24,8 @@ Then we need to get a cloudflare API_KEY from cloudflare dashboard : <l>https://
 Now run the script below
 ```shell
 wget https://raw.githubusercontent.com/bigwhoman/Password-Manager/main/install_cf.sh
-chmod +x install.sh
-sudo bash install.sh
+chmod +x install_cf.sh
+sudo bash install_cf.sh
 ```
 In the next steps you are asked some questions, answer them.<br>
 After the complete installation ( lookout for the ports and check if docker ps is right) you would get 
