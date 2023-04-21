@@ -15,10 +15,10 @@ while [[ -z "$email" ]]; do
   read -p "Cloudflare email cannot be empty. Please enter Cloudflare email: " email
 done
 
-read -sp "Enter Cloudflare API key: " api_key
+read -p "Enter Cloudflare API key: " api_key
 while [[ -z "$api_key" ]]; do
   echo ""
-  read -sp "Cloudflare API key cannot be empty. Please enter Cloudflare API key: " api_key
+  read -p "Cloudflare API key cannot be empty. Please enter Cloudflare API key: " api_key
 done
 
 read -p "Enter port (default: 8443): " port
